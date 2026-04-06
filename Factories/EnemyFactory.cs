@@ -1,4 +1,6 @@
-﻿namespace ISIP223_Bulatov.Factories
+﻿using System;
+
+namespace ISIP223_Bulatov.Factories
 {
     internal class EnemyFactory : IEnemyFactory
     {

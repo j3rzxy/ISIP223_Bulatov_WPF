@@ -13,5 +13,13 @@ namespace ISIP223_Bulatov_WPF
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            // Прямой запуск без StartupUri
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ISIP223_Bulatov_WPF"
         mc:Ignorable="d"
-        Title="КИПФИН Рогалик" Height="600" Width="900"
+        Title="КИПФИН Рогалик" Height="700" Width="900"
         WindowStartupLocation="CenterScreen"
         Background="#1E1E1E" Foreground="White">
 
@@ -125,17 +125,26 @@
 
         <!-- 3. ПАНЕЛЬ УПРАВЛЕНИЯ -->
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <!-- Только две кнопки: Атака и Защита -->
             <Button Content="⚔️ Атака" Width="100" Margin="5" Click="BtnAttack_Click"
-                    IsEnabled="{Binding IsGameActive}"/>
+            IsEnabled="{Binding IsGameActive}"/>
             <Button Content="🛡️ Защита" Width="100" Margin="5" Click="BtnDefend_Click"
-                    IsEnabled="{Binding IsGameActive}"/>
-            <Button Content="💧 Зелье" Width="100" Margin="5" Click="BtnHeal_Click"
-                    IsEnabled="{Binding IsGameActive}"/>
+            IsEnabled="{Binding IsGameActive}"/>
 
             <Separator Width="20" Background="Transparent"/>
 
             <!-- Инвентарь / Слоты -->
             <Border Background="#333" Padding="10" CornerRadius="4" VerticalAlignment="Center">
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=(SystemParameters.HighContrast)}" Value="True">
+                                <Setter Property="CornerRadius" Value="0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <StackPanel Orientation="Horizontal">
                     <StackPanel Margin="0,0,15,0">
                         <TextBlock Text="Оружие:" FontSize="10" Foreground="#888"/>
@@ -150,7 +159,7 @@
         </StackPanel>
 
         <!-- 4. ЛОГ СОБЫТИЙ -->
-        <Border Grid.Row="3" Background="#111" Padding="5" Height="100">
+        <Border Grid.Row="3" Background="#111" Padding="5" Height="200">
             <Border.Style>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>

@@ -16,7 +16,7 @@ namespace ISIP223_Bulatov_WPF
         private int _turn = 1;
         private bool _isDefending;
         private bool _isGameActive;
-        private bool _encounterInProgress;  // ← НОВОЕ: флаг активной встречи
+        private bool _encounterInProgress;
 
         // --- Factories ---
         private readonly IItemFactory _itemFactory = new ChestItemFactory();
@@ -116,7 +116,7 @@ namespace ISIP223_Bulatov_WPF
             _rand = new Random();
             _turn = 1;
             _isDefending = false;
-            _encounterInProgress = false;  // ← Сброс флага
+            _encounterInProgress = false;
 
             PlayerHP = _player.HP;
             PlayerMaxHP = _player.MaxHP;
@@ -132,17 +132,15 @@ namespace ISIP223_Bulatov_WPF
 
         private void NextTurnSetup()
         {
-            // Проверяем, жив ли игрок
             if (_player.HP <= 0)
             {
                 EndGame(false);
                 return;
             }
 
-            // ← НОВОЕ: встреча начинается только если нет активной
             if (_encounterInProgress) return;
 
-            _encounterInProgress = true;  // ← Помечаем, что встреча началась
+            _encounterInProgress = true;
 
             if (_turn % 10 == 0)
             {
@@ -169,13 +167,12 @@ namespace ISIP223_Bulatov_WPF
 
             CurrentEnemyName = _currentEnemy.Name + (isBoss ? " (БОСС)" : "");
             CurrentEnemyMaxHP = _currentEnemy.MaxHP;
-            CurrentEnemyHP = _currentEnemy.HP;  // ← Сначала обновляем HP, потом текст
+            CurrentEnemyHP = _currentEnemy.HP;
             CurrentEnemyType = _currentEnemy.Type;
 
             AddLog($"\n⚠️ Встречен враг: {_currentEnemy.Name}!");
             _isDefending = false;
 
-            // ← НЕ вызываем EndEncounter здесь! Ждём действий игрока
         }
 
         private void SpawnChest()
@@ -193,7 +190,7 @@ namespace ISIP223_Bulatov_WPF
             {
                 AddLog("✨ Внутри зелье! Вы полностью исцелены.");
                 _player.Heal();
-                PlayerHP = _player.HP;  // ← Обновляем отображение
+                PlayerHP = _player.HP;
                 AddLog($"💚 Ваше здоровье: {PlayerHP:F0}/{PlayerMaxHP:F0}");
             }
             else
@@ -223,18 +220,14 @@ namespace ISIP223_Bulatov_WPF
                     AddLog("Предмет хуже текущего, проигнорирован.");
                 }
             }
-
-            // ← Сундук обработан — завершаем встречу и переходим к следующей
             EndEncounter();
         }
 
-        // ← НОВОЕ: завершение встречи (враг мёртв или сундук открыт)
         private void EndEncounter()
         {
-            _encounterInProgress = false;  // ← Сбрасываем флаг
+            _encounterInProgress = false;
             _currentEnemy = null;
 
-            // ← Переход к следующей встрече только после завершения текущей
             NextTurnSetup();
         }
 
@@ -242,15 +235,15 @@ namespace ISIP223_Bulatov_WPF
 
         private void BtnAttack_Click(object sender, RoutedEventArgs e)
         {
-            // ← Проверка: встреча должна быть активна и враг должен существовать
+
             if (!IsGameActive || !_encounterInProgress || _currentEnemy == null) return;
 
-            // Проверка заморозки
+
             if (IsFrozen)
             {
                 AddLog("❄️ Вы заморожены и пропускаете ход!");
                 IsFrozen = false;
-                // ← Заморозка не завершает встречу — враг ходит
+
                 EnemyTurn();
                 return;
             }
@@ -260,18 +253,16 @@ namespace ISIP223_Bulatov_WPF
             if (_currentEnemy.Type == "Slug") damage = Math.Max(1, damage - 2);
 
             _currentEnemy.HP -= damage;
-            CurrentEnemyHP = _currentEnemy.HP;  // ← Обновляем UI
+            CurrentEnemyHP = _currentEnemy.HP;
             AddLog($"⚔️ Вы атаковали! Нанесено {damage} урона.");
 
-            // ← ПРОВЕРКА ПОБЕДЫ: только если враг мёртв
             if (_currentEnemy.HP <= 0)
             {
                 AddLog($"🏆 Вы победили {_currentEnemy.Name}!");
-                EndEncounter();  // ← Только здесь завершаем встречу!
+                EndEncounter();
                 return;
             }
 
-            // ← Если враг ещё жив — его ход
             EnemyTurn();
         }
 
@@ -281,10 +272,9 @@ namespace ISIP223_Bulatov_WPF
 
             _isDefending = true;
             AddLog("🛡️ Вы перешли в оборону (снижение урона).");
-            EnemyTurn();  // ← Защита не завершает встречу
+            EnemyTurn();
         }
 
-        // ← Кнопка лечения УДАЛЕНА (BtnHeal_Click больше не нужен)
 
         private void BtnRestart_Click(object sender, RoutedEventArgs e)
         {
@@ -295,21 +285,17 @@ namespace ISIP223_Bulatov_WPF
 
         private void EnemyTurn()
         {
-            // ← Защита от вызова, если врага нет
             if (_currentEnemy == null || _currentEnemy.HP <= 0) return;
 
-            // Проверка уклонения
             if (_rand.Next(100) < 40)
             {
                 AddLog("✨ Вы уклонились от атаки!");
-                // ← Уклонение не завершает встречу — ждём следующего хода игрока
                 return;
             }
 
             int damage = _currentEnemy.Attack;
 
-            // Расчет защиты
-            if (_currentEnemy.Type != "Skeleton")  // Скелет игнорирует броню
+            if (_currentEnemy.Type != "Skeleton")
             {
                 if (_isDefending)
                 {
@@ -324,10 +310,9 @@ namespace ISIP223_Bulatov_WPF
             }
 
             _player.HP -= damage;
-            PlayerHP = _player.HP;  // ← Обновляем UI
+            PlayerHP = _player.HP;
             AddLog($"👹 {_currentEnemy.Name} атакует! Вы получили {damage} урона.");
 
-            // Спец-способности врагов
             if (_currentEnemy.Type == "Goblin" && _rand.Next(100) < 20)
             {
                 int crit = _currentEnemy.Attack;
@@ -341,9 +326,7 @@ namespace ISIP223_Bulatov_WPF
                 AddLog("🧙‍♂️ Маг заморозил вас! Следующий ход пропущен.");
             }
 
-            _isDefending = false;  // ← Сброс защиты после хода врага
-
-            // ← ПРОВЕРКА ПОРАЖЕНИЯ
+            _isDefending = false;  
             if (_player.HP <= 0)
             {
                 _player.HP = 0;
@@ -351,22 +334,14 @@ namespace ISIP223_Bulatov_WPF
                 EndGame(false);
                 return;
             }
-
-            // ← Если оба живы — просто ждём следующего действия игрока
-            // НЕ вызываем EndEncounter!
         }
 
-        private void CheckWinCondition()
-        {
-            // ← Этот метод теперь не нужен, проверка встроена в BtnAttack_Click
-            // Оставляем для совместимости, но он пустой
-        }
 
         private void EndGame(bool win)
         {
             IsGameActive = false;
             IsGameOver = true;
-            _encounterInProgress = false;  // ← Сброс флага при конце игры
+            _encounterInProgress = false; 
             GameOverMessage = win ? "ПОБЕДА!" : "ВЫ ПОГИБЛИ";
             AddLog(win ? "\n🎉 Игра пройдена!" : "\n💀 Игра окончена...");
         }
@@ -391,13 +366,13 @@ namespace ISIP223_Bulatov_WPF
         private void UpdatePlayerHPText()
         {
             PlayerHPText = $"HP: {PlayerHP:F0}/{PlayerMaxHP:F0}";
-            OnPropertyChanged(nameof(PlayerHPText));  // ← Важно для обновления текста
+            OnPropertyChanged(nameof(PlayerHPText));
         }
 
         private void UpdateEnemyHPText()
         {
             CurrentEnemyHPText = $"HP: {CurrentEnemyHP:F0}/{CurrentEnemyMaxHP:F0}";
-            OnPropertyChanged(nameof(CurrentEnemyHPText));  // ← Важно для обновления текста
+            OnPropertyChanged(nameof(CurrentEnemyHPText));
         }
 
         // --- INotifyPropertyChanged ---

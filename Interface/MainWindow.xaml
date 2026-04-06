@@ -10,9 +10,7 @@
         Background="#1E1E1E" Foreground="White">
 
     <Window.Resources>
-        <!-- Конвертер: Тип врага -> Цвет рамки -->
         <local:EnemyTypeToBrushConverter x:Key="EnemyTypeConverter"/>
-        <!-- Конвертер: Булево значение -> Видимость -->
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </Window.Resources>
 

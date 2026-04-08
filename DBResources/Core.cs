@@ -10,10 +10,10 @@ namespace ISIP223_Bulatov_WPF
     internal class Core
     {
         public static PCBuilderDBEntities Context = new PCBuilderDBEntities();
-        public static assembly_ CurrentAssembly;
+        public static assembly CurrentAssembly;
         public static List<PartSlot> PartSlots;
 
-        public static Dictionary<string, string> LoadSpecs(basepart_ part)
+        public static Dictionary<string, string> LoadSpecs(basepart part)
         {
             var specs = new Dictionary<string, string>();
 

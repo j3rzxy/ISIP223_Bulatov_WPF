@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Архив сборок">
 
-    <Grid Margin="20" Background="White">
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

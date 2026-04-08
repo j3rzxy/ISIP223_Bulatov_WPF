@@ -185,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Selection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\Choice.xaml.cs">
@@ -192,6 +196,9 @@
     </Compile>
     <Compile Include="Pages\Saved.xaml.cs">
       <DependentUpon>Saved.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Selection.xaml.cs">
+      <DependentUpon>Selection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

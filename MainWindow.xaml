@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ISIP223_Bulatov_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="PC Builder" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Content="Сборка" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="40" Width="100" Margin="10,10,0,0"/>
+        <Button Content="Сохраненные сборки" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Height="40" Width="Auto" Margin="115,10,0,0"/>
     </Grid>
 </Window>

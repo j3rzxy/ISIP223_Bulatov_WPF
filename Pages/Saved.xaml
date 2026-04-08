@@ -6,9 +6,71 @@
       xmlns:local="clr-namespace:ISIP223_Bulatov_WPF.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Saved">
+      Title="Архив сборок">
 
-    <Grid>
-        
+    <Grid Margin="20" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Сохранённые конфигурации" FontSize="24" FontWeight="Bold" Margin="5,5,5,20" Foreground="#2C3E50"/>
+
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0,0,0,0">
+            <ItemsControl x:Name="LbAssemblies"
+                     Background="Transparent" 
+                     BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     HorizontalContentAlignment="Stretch">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="White" CornerRadius="8" Padding="15" Margin="5,0,5,10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="1" Color="#D0D0D0" Opacity="1"/>
+                            </Border.Effect>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Width="60" Height="60" Background="#E3F2FD" CornerRadius="30">
+                                    <TextBlock Text="🖥️" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <StackPanel Grid.Column="1" Margin="20,0">
+                                    <TextBlock Text="{Binding name}" FontSize="20" FontWeight="Bold" Foreground="#2C3E50"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                        <TextBlock Text="Автор: " Foreground="#95A5A6" FontSize="14"/>
+                                        <TextBlock Text="{Binding author}" Foreground="#34495E" FontWeight="SemiBold" FontSize="14"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="2"  Orientation="Horizontal">
+                                    <Button Content="Загрузить" 
+                                        Padding="15,5" Margin="0,0,5,0" 
+                                        Background="#2980B9" Height="35"
+                                        Foreground="White" 
+                                        Click="BtnView_Click"
+                                        Tag="{Binding id}">
+                                    </Button>
+                                    <Button Content="Удалить" 
+                                        Padding="15,5"  Height="35"
+                                        Background="#FFFF4545" 
+                                        Foreground="White" 
+                                        Click="BtnDelete_Click"
+                                        Tag="{Binding id}">
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Page>

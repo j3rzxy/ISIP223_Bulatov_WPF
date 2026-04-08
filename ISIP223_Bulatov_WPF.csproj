@@ -35,8 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>.\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>.\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -63,6 +71,108 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DBResources\assembly.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\basepart.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\boardformfactorcase.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\case.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\casesize.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\certificate.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\cpu.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\fandimension.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\formfactor.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\gpu.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\gpuinterface.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\hdd.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\igpu.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\manufacturer.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\memorytype.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\motherboard.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\partassembly.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\parttype.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\PCBuilderDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCBuilderDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\PCBuilderDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\PCBuilderDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCBuilderDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\powersupply.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\processorcooler.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\ram.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\socket.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\socketprocessorcooler.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\ssd.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\storagedevice.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\storagedeviceinterface.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\storagedevicetype.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\videoconnector.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBResources\videoconnectorgpu.cs">
+      <DependentUpon>PCBuilderDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -86,6 +196,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="DBResources\PCBuilderDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PCBuilderDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBResources\PCBuilderDB.edmx.diagram">
+      <DependentUpon>PCBuilderDB.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +211,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBResources\PCBuilderDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCBuilderDB.Context.cs</LastGenOutput>
+      <DependentUpon>PCBuilderDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="DBResources\PCBuilderDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PCBuilderDB.edmx</DependentUpon>
+      <LastGenOutput>PCBuilderDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

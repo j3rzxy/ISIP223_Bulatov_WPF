@@ -71,6 +71,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core.cs" />
     <Compile Include="DBResources\assembly.cs">
       <DependentUpon>PCBuilderDB.tt</DependentUpon>
     </Compile>
